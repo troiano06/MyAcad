@@ -1,0 +1,256 @@
+* {
+    font-family: 'Roboto';
+}
+
+.button {
+    text-align: center;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    padding-bottom: 100px;
+    position: relative;
+}
+
+.row {
+    margin: 0;
+}
+
+.container-fluid {
+padding: 0;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+div.collapse{
+    padding-left:50px;
+    padding-right:50px;
+}
+
+li.nav-item {
+    padding-left:30px;
+    padding-right:30px;
+}
+
+.msg {
+    background-color: #D4EDDA;
+    color: #155724;
+    border: 1px solid #C3E6CB;
+    width: 100%;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 10px;
+    font-size: 15px;
+}
+
+/*Navbar*/
+
+
+#navbar-icon{
+    margin-top: -60px;
+}
+
+#navbar-category{
+    justify-content: space-between;
+    padding: 5px 0;
+    margin-top: -10px;
+}
+
+#navbar-category a {
+    font-size: 30px;
+    color: #000000;
+}
+
+#navbar-category a:hover {
+    color: #757575;
+}
+
+
+/*Search Container*/
+#search-container {
+    background-size: cover;
+    background-position: center;
+    height: 100px;
+    text-align: center;
+}
+
+#search-container h1 {
+color: #000000;
+margin-bottom: 30px;
+font-weight: 400;
+margin-top: 10px;
+margin-bottom: 0;
+}
+
+#search-container form {
+width: 450px;
+margin: 0 auto;
+padding-bottom: 0;
+border-bottom: 0;
+}
+
+div.courses#search-container {
+    color: #000000;
+    width: 5%;
+}
+
+div.form-check {
+    margin-top: 40%;
+}
+
+/*Botão add*/
+.float{
+	position:fixed;
+	width:90px;
+	height:90px;
+	bottom:10%;
+	right:5%;
+	background-color:#0C9;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+/*Ion-Icon*/
+ion-icon.new-post {
+    margin-top: 10px;
+    margin-left: -1px;
+    font-size: 70px;
+}
+
+ion-icon.menu {
+    font-size: 90px;
+    margin-left: 25px;
+    color: #000000;
+}
+
+ion-icon.menu-icon {
+    margin-top: 5px;
+    margin-bottom: -5px;
+    font-size: 35px;
+}
+
+ion-icon.post-filter {
+    margin-top: 10px;
+    font-size: 40px;
+}
+
+
+/* Posts list */
+#posts-container {
+  padding: 50px;
+}
+
+#cards-container {
+    display: flex;
+}
+
+#posts-container .card {
+  flex: 1 1 32%;
+  max-width: 33.33%;
+  border-radius: 10px;
+  border: 1px solid #ffffff;
+  padding: 0;
+  margin: 0;
+}
+
+#posts-container img {
+  max-height: 150px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card .card-date {
+  font-size: 12px;
+  color: #CCC;
+}
+
+.card .card-title {
+  color: #212121;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.card-participants {
+  font-size: 14px;
+  color: #757575;
+}
+
+/* Create Page */
+
+#post-create-container {
+    padding: 30px;
+}
+
+#post-create-container label {
+    font-weight: bold;
+}
+
+#post-create-container input,
+#post-create-container select,
+#post-create-container textarea {
+    font-size: 15px;
+}
+
+/* Post Show page */
+#image-container,
+#info-container {
+  margin-top: 30px;
+}
+
+#image-container img {
+  border-radius: 10px;
+}
+
+#info-container h1 {
+  font-size: 36px;
+  font-weight: 900;
+}
+
+#info-container p {
+  margin: 0;
+  font-size: 16px;
+  display: flex;
+}
+
+#info-container h3,
+#content-container h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#info-container ion-icon {
+  font-size: 20px;
+  color: #a30c0c;
+  margin-right: 5px;
+}
+
+#info-container #event-submit {
+  margin: 20px 0;
+}
+
+/* Edit page */
+
+.img-preview {
+    width: 200px;
+    margin-top: 20px;
+}
+
+/* footer */
+footer {
+  text-align: center;
+  background-color: #a30c0c;
+  color: #FFF;
+  padding: 30px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+footer p {
+  margin-bottom: 0;
+}
