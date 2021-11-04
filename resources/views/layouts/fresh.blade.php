@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <link rel="icon" type="image/x-icon" href="/img/favicon.png"/>
         <title>@yield('title')</title>
 
         <!--Fonte do Google-->
@@ -14,60 +14,68 @@
         <!--CSS Bootstrap-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
         <!--CSS da Aplicação-->
         <link rel="stylesheet" href="/css/styles.css">
         <script src="/js/scripts.js"></script>
-
-        <!--Testes-->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('dropdown-toggle').dropdown()
-            });
-        </script>
     </head>
     <body>
-        <div class="myacad-header">
-            <nav class="navbar navbar-expand-lg navbar-light col-16">
-                <div class="navbar-collapse col" id="navbar-menu" >
-                    <a href="#" class="dropdown" data-toggle="dropdown"><ion-icon class="menu" name="menu-outline"></ion-icon></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li class="menu-item"><a href="#"><ion-icon class="menu-icon" name="person-outline"></ion-icon> Perfil </a></li>
-                        <li class="divider"></li>
-                        <li class="menu-item"><a href="#"><ion-icon class="menu-icon" name="alert-circle-outline"></ion-icon> Notificações </a></li>
-                        <li class="divider"></li>
-                        <li class="menu-item"><a href="/rules"><ion-icon class="menu-icon" name="shield-checkmark-outline"></ion-icon> Regras </a></li>
-                    </ul>
-                </div>
-                <div class="navbar-collapse col" id="navbar-icon" >
-                    <a href="/" class="navbar-brand">
-                        <img src="/img/myacad_logo.png" alt="MyAcad" id="logo">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="dropdown">
+                    <a href="#" class="dropdown" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <ion-icon class="menu" name="menu-outline"></ion-icon>
                     </a>
-                </div>
-                <div class="collapse navbar-collapse col-12" id="navbar-category" >
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="/calouros" class="nav-link">Recepção</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/calouros/sobre" class="nav-link">Sobre a Fatec</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/calouros/posts" class="nav-link">Veteranos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/calouros/posts" class="nav-link">Repúblicas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/calouros/grupos" class="nav-link">Grupos</a>
-                        </li>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li><a class="dropdown-item" href="/perfil/{{ auth()->user()->id }}">Perfil</a></li>
+                      <li><a class="dropdown-item" href="#">Notificações</a></li>
+                      <li><a class="dropdown-item" href="/regras">Regras</a></li>
+                      <li><a class="dropdown-item" href="/"><img src="/img/myacad_logo.png" alt="MyAcad" id="logo"></a></li>
+                      <li>
+                          <form action="/logout" method="POST">
+                            @csrf
+                            <a class="dropdown-item"
+                             href="/logout"
+                             onclick="event.preventDefault();
+                                      this.closest('form').submit();">
+                                Sair
+                            </a>
+                        </form>
+                      </li>
                     </ul>
                 </div>
-            </nav>
-        </div>
+                <a class="navbar-brand" href="/calouros"><img src="/img/calouros_logo.png" alt="MyAcad" id="logo"></a>
+
+            </div>
+        </nav>
+        <nav class="navbar justify-content-center navbar-expand-lg navbar-light bg-light nav fill">
+            <div class="container-fluid justify-content-center nav-fill">
+                <ul class="navbar-nav justify-content-center me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/calouros">Recepção</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/calouros/sobre">Sobre a Fatec</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/calouros/depoimentos">Veteranos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/calouros/republicas">Repúblicas</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/calouros/grupos">Grupos</a>
+                  </li>
+                </ul>
+                <form class="d-flex" action="/" action="GET">
+                    <input class="form-control me-2" type="search" id="search" name="search" placeholder="Procurando algo?" aria-label="Search">
+                    <button class="btn btn-outline-dark" type="submit">Pesquisar</button>
+                </form>
+            </div>
+        </nav>
+
         <main>
             <div class="container-fluid">
                 <div class="row">
