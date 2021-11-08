@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Course;
 
 class PostController extends Controller
 {
@@ -39,7 +40,10 @@ class PostController extends Controller
     }
 
     public function create() {
-        return view('posts.create');
+
+        $courses = Course::all();
+
+        return view('posts.create', ['courses' => $courses]);
     }
 
     public function store(Request $request) {
@@ -48,7 +52,6 @@ class PostController extends Controller
 
         $post->title = $request->title;
         $post->category = $request->category;
-        $post->course = $request->course;
         $post->content = $request->content;
         $post->status = "Pendente";
         $post->date = date("Y-m-d H:i:s");
@@ -70,6 +73,7 @@ class PostController extends Controller
 
         $user = auth()->user();
         $post->user_id = $user->id;
+        $post->course_id = $request->course_id;
 
         $post->save();
 
@@ -81,8 +85,9 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         $postOwner = User::where('id', $post->user->id)->first()->toArray();
+        $postCourse = Course::where('id', $post->course->id)->first()->toArray();
 
-        return view('posts.show', ['post' => $post, 'postOwner' => $postOwner]);
+        return view('posts.show', ['post' => $post, 'postOwner' => $postOwner, 'postCourse' => $postCourse]);
     }
 
     public function myPosts() {
@@ -97,9 +102,11 @@ class PostController extends Controller
 
     public function edit($id) {
 
+        $courses = Course::all();
+
         $post = Post::findOrFail($id);
 
-        return view('posts.edit', ['post' => $post]);
+        return view('posts.edit', ['post' => $post, 'courses' => $courses]);
     }
 
     public function update(Request $request) {
@@ -148,7 +155,9 @@ class PostController extends Controller
 
     public function profileEdit() {
 
-        return view('profile-edit');
+        $courses = Course::all();
+
+        return view('profile-edit', ['courses' => $courses]);
     }
 
     public function profileUpdate(Request $request) {

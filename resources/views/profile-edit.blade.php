@@ -21,6 +21,29 @@
                     <input type="text" class="form-control" id="email" name="email" disabled value="{{auth()->user()->email}}">
                 </div>
                 <br>
+                <div class="form-group">
+                    <label for="title">RA</label>
+                    <input type="text" class="form-control" id="RA" name="RA" value="{{auth()->user()->RA}}">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="title">Semestre</label>
+                    <select name="semester" id="semester" class="form-control">
+                        @for ($x=1; $x<9; $x++)
+                            <option value="{{ $x }}" {{ auth()->user()->semester == $x ? "selected='selected'" : "" }}>{{ $x }}</option>
+                        @endfor
+                    </select>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="title">Curso</label>
+                    <select name="course_id" id="course_id" class="form-control">
+                        @foreach ($courses as $course)
+                            <option value="{{ $course->id }}" {{ auth()->user()->course->id == $course->id ? "selected='selected'" : "" }} >{{ $course->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <br>
                 <input type="submit" class="btn btn-dark" value="Atualizar">
             </form>
         </div>

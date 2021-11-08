@@ -26,12 +26,10 @@
         <br>
         <div class="form-group">
             <label for="title">Curso</label>
-            <select name="course" id="course" class="form-control">
-                <option value="Todos">Todos</option>
-                <option value="ADS">Análise e Desenvolvimento de Sistemas</option>
-                <option value="LOG">Logística</option>
-                <option value="POL">Polímeros</option>
-                <option value="SBIO">Sistemas Biomédicos</option>
+            <select name="course_id" id="course_id" class="form-control">
+                @foreach ($courses as $course)
+                    <option value="{{ $course->id }}" >{{ $course->name }}</option>
+                @endforeach
             </select>
         </div>
         <br>

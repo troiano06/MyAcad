@@ -28,12 +28,10 @@
         <br>
         <div class="form-group">
             <label for="title">Curso</label>
-            <select name="course" id="course" class="form-control">
-                <option value="Todos" >Todos</option>
-                <option value="ADS" {{ $post->course == "ADS" ? "selected='selected'" : "" }}>Análise e Desenvolvimento de Sistemas</option>
-                <option value="LOG" {{$post->course == "LOG" ? "selected='selected'" : ""}}>Logística</option>
-                <option value="POL" {{$post->course == "POL" ? "selected='selected'" : ""}}>Polímeros</option>
-                <option value="SBIO" {{$post->course == "SBIO" ? "selected='selected'" : ""}}>Sistemas Biomédicos</option>
+            <select name="course_id" id="course_id" class="form-control">
+                @foreach ($courses as $course)
+                    <option value="{{ $course->id }}" >{{ $course->name }}</option>
+                @endforeach
             </select>
         </div>
         <br>

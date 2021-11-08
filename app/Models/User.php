@@ -27,6 +27,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'RA',
+        'semester',
+        'course_id',
     ];
 
     /**
@@ -61,5 +64,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function posts() {
         return $this->hasMany('App\Models\Post');
+    }
+
+    public function course() {
+        return $this->belongsTo('App\Models\Course');
     }
 }

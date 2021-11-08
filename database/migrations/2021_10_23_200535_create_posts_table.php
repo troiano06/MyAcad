@@ -21,7 +21,6 @@ class CreatePostsTable extends Migration
             $table->text("content");
             $table->string("category");
             $table->string("status");
-            $table->string("course");
             $table->dateTime("date");
             $table->foreignId("user_id")->constrained();
         });

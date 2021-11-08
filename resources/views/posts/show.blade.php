@@ -13,7 +13,7 @@
                 <h1>{{ $post->title }}</h1>
                 <p class="post-owner"><ion-icon name="person"></ion-icon> {{ $postOwner['name'] }} </p>
                 <p class="post-category"><ion-icon name="bookmark"></ion-icon> {{ $post->category }}</p>
-                <p class="post-course"><ion-icon name="book"></ion-icon> {{ $post->course }}</p>
+                <p class="post-course"><ion-icon name="book"></ion-icon> {{ $postCourse['initials'] }}</p>
             </div>
             <div class="col-md-12" id="content-container">
                 <p class="post-content">{{ $post->content }}</p>
