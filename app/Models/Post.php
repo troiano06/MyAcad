@@ -20,4 +20,12 @@ class Post extends Model
     public function course() {
         return $this->belongsTo('App\Models\Course');
     }
+
+    public function likes() {
+        return $this->hasMany('App\Models\Like');
+    }
+
+    public function comment() {
+        return $this->hasMany('App\Models\Comment');
+    }
 }

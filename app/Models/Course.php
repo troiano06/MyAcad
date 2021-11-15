@@ -12,4 +12,8 @@ class Course extends Model
     public function users() {
         return $this->hasMany('App\Models\User');
     }
+
+    public function posts() {
+        return $this->hasMany('App\Models\Post');
+    }
 }

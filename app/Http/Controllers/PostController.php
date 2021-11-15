@@ -53,7 +53,11 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->category = $request->category;
         $post->content = $request->content;
-        $post->status = "Pendente";
+        if (auth()->user()->profile_type == 'Moderador'){
+            $post->status = "Aprovado";
+        } else {
+            $post->status = "Pendente";
+        }
         $post->date = date("Y-m-d H:i:s");
 
         // Image Upload
@@ -84,10 +88,7 @@ class PostController extends Controller
 
         $post = Post::findOrFail($id);
 
-        $postOwner = User::where('id', $post->user->id)->first()->toArray();
-        $postCourse = Course::where('id', $post->course->id)->first()->toArray();
-
-        return view('posts.show', ['post' => $post, 'postOwner' => $postOwner, 'postCourse' => $postCourse]);
+        return view('posts.show', ['post' => $post]);
     }
 
     public function myPosts() {
@@ -133,12 +134,39 @@ class PostController extends Controller
         return redirect('/')->with('msg', 'Publicação editada com sucesso!');
     }
 
+    public function enable($id) {
+
+        Post::where('id', $id)->update(array('status' => 'Aprovado'));
+
+        return redirect('/notificacoes')->with('msg', "Publicação". $id . " aprovada com sucesso!");
+    }
+
     public function disable($id) {
 
 
         Post::where('id', $id)->update(array('status' => 'Desativado'));
 
+        $post = Post::findOrFail($id);
+
+        if (auth()->user()->profile_type == 'Moderador' && $post->user_id != auth()->user()->id){
+            return redirect('/notificacoes')->with('msg', 'Publicação #ID' . $id . ' desativada com sucesso!');
+        }
+
         return redirect('/perfil/my-posts')->with('msg', 'Publicação desativada com sucesso!');
+    }
+
+    public function like($postId) {
+
+        $post = Post::find($postId);
+
+        $post->likes()->create([
+            'user_id' => auth()->user()->id
+        ]);
+    }
+
+    public function unlike(Post $post) {
+
+        $post->likes()->delete();
     }
 
     //Perfil
@@ -167,6 +195,19 @@ class PostController extends Controller
         User::findOrFail(auth()->user()->id)->update($data);
 
         return redirect('/')->with('msg', 'Perfil editado com sucesso!');
+    }
+
+    public function notifications() {
+        if (auth()->user()->profile_type != 'Moderador'){
+            return redirect('/')->with('msg', 'Acesso negado.');
+        }
+
+        $posts = Post::where([
+            ['course_id', auth()->user()->course_id],
+            ['status', 'Pendente']
+        ])->get();
+
+        return view('notifications', ['posts' => $posts]);
     }
 
     public function rules() {

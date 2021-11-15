@@ -1,18 +1,17 @@
 @extends('layouts.main')
 
-@section('title','Meus Posts')
+@section('title','Notificações')
 
 @section('content')
 
 <div class="col-md-10 offset-md-1 dashboard-title-container">
-    <h1>Meus Posts</h1>
+    <h1>Posts pendentes de aprovação</h1>
 </div>
 <div class="col-md-10 offset-md-1 dashboard-posts-container">
     @if (count($posts) > 0)
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">ID</th>
                     <th scope="col">Título</th>
                     <th scope="col">Categoria</th>
@@ -23,21 +22,12 @@
             <tbody>
                 @foreach ($posts as $post)
                     <tr>
-                        <td scope="row"> {{ $loop->index + 1 }} </td>
                         <td scope="row"> {{ $post->id }} </td>
-                        <td><a href="/posts/{{ $post->id }}">{{ $post->title }}</a></td>
+                        <td>{{ $post->title }}</td>
                         <td>{{ $post->category }}</td>
                         <td>{{ $post->status }}</td>
                         <td>
-                            @if ($post->status != 'Desativado')
-                                <form action="/posts/disable/{{$post->id}}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    <input type="submit" class="btn btn-danger delete-btn" value="Desativar">
-                                </form>
-                           @else
-                                <p>Nenhuma ação disponível</p>
-                            @endif
+                            <input type="submit" class="btn btn-info delete-btn" onclick="location.href='/posts/{{ $post->id }}';" value="Avaliar">
                         </td>
                     </tr>
                 @endforeach

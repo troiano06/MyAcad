@@ -17,7 +17,7 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
+                <x-jet-label for="email" value="{{ __('Email (exemplo@fatec.sp.gov.br)') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
                 <!--<div class="flex flex-wrap items-stretch w-full mb-4 relative">
                     <x-jet-input id="email" class="flex-shrink flex-grow  flex-auto leading-normal w-px flex-1 border-l-0 border-grey-light rounded rounded-r-none px-3 relative" type="email" name="email" :value="old('email')" required />

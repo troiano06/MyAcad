@@ -20,18 +20,23 @@
         <!--CSS da Aplicação-->
         <link rel="stylesheet" href="/css/styles.css">
         <script src="/js/scripts.js"></script>
+        @livewireStyles
     </head>
     <body>
+
+
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <div class="dropdown">
                     <a href="#" class="dropdown" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <ion-icon class="menu" name="menu-outline"></ion-icon>
+                        </ion-icon><ion-icon class="menu" name="apps-sharp"></ion-icon>
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="/perfil/{{ auth()->user()->id }}">Perfil</a></li>
-                      <li><a class="dropdown-item" href="#">Notificações</a></li>
-                      <li><a class="dropdown-item" href="/regras">Regras</a></li>
+                    <ul class="dropdown-menu" id="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li><a class="dropdown-item" href="/perfil/{{ auth()->user()->id }}"><ion-icon name="person-sharp"></ion-icon> Perfil</a></li>
+                      @if (auth()->user()->profile_type == 'Moderador')
+                        <li><a class="dropdown-item" href="/notificacoes"><ion-icon name="at-circle-sharp"></ion-icon> Notificações</a></li>
+                      @endif
+                      <li><a class="dropdown-item" href="/regras"><ion-icon name="alert-circle-sharp"></ion-icon> Regras</a></li>
                       <li><a class="dropdown-item" href="/calouros"><img src="/img/calouros_logo.png" alt="MyAcad" id="logo"></a></li>
                       <li>
                           <form action="/logout" method="POST">
@@ -40,7 +45,7 @@
                              href="/logout"
                              onclick="event.preventDefault();
                                       this.closest('form').submit();">
-                                Sair
+                                <ion-icon name="power-sharp"></ion-icon> Sair
                             </a>
                         </form>
                       </li>
@@ -51,31 +56,38 @@
             </div>
         </nav>
         <nav class="navbar justify-content-center navbar-expand-lg navbar-light bg-light nav fill">
-            <div class="container-fluid justify-content-center nav-fill">
-                <ul class="navbar-nav justify-content-center me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/categoria/geral">Geral</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/categoria/comunicado">Comunicados</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/categoria/evento">Eventos</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/categoria/vaga">Vagas</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/categoria/artigo">Artigos</a>
-                  </li>
-                </ul>
-                <form class="d-flex" action="/" action="GET">
-                    <input class="form-control me-2" type="search" id="search" name="search" placeholder="Procurando algo?" aria-label="Search">
-                    <button class="btn btn-outline-dark" type="submit">Pesquisar</button>
-                </form>
+            <div class="container-fluid">
+                <button style="width: 40%; height: 50px; border: 2px solid #7e7e7e;" class="navbar-toggler container-fluid justify-content-center" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <ion-icon class="menu-collapse" name="menu-sharp"></ion-icon>
+                  </button>
+                <div class="collapse navbar-collapse container-fluid justify-content-center nav-fill" id="navbarTogglerDemo01" >
+                    <ul class="navbar-nav justify-content-center me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/"><ion-icon name="home-sharp"></ion-icon> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/categoria/geral"><ion-icon name="leaf-sharp"></ion-icon> Geral</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/categoria/comunicado"><ion-icon name="megaphone-sharp"></ion-icon> Comunicados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/categoria/evento"><ion-icon name="calendar-number-sharp"></ion-icon> Eventos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/categoria/vaga"><ion-icon name="newspaper-sharp"></ion-icon> Vagas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/categoria/artigo"><ion-icon name="receipt-sharp"></ion-icon> Artigos</a>
+                    </li>
+                    <li class="nav-item">
+                        <form class="d-flex" action="/" action="GET" id="search">
+                            <input class="form-control me-2" type="search" id="search" name="search" placeholder="Procurando algo?" aria-label="Search">
+                            <button class="btn btn-outline-dark" type="submit">Pesquisar</button>
+                        </form>
+                    </li>
+                    </ul>
+                </div>
             </div>
         </nav>
 
@@ -94,5 +106,7 @@
         </footer>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    @livewireScripts
     </body>
 </html>

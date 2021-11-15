@@ -69,30 +69,31 @@ li.nav-item {
 }
 
 
-/*Search Container*/
-#search-container {
+/*Title Container*/
+#title-container {
     background-size: cover;
     background-position: center;
-    height: 100px;
+    height: 60px;
     text-align: center;
 }
 
-#search-container h1 {
+#title-container h1 {
 color: #000000;
-margin-bottom: 30px;
+margin-bottom: 10px;
 font-weight: 400;
-margin-top: 10px;
+margin-top: 20px;
 margin-bottom: 0;
+font-style: italic;
 }
 
-#search-container form {
+#title-container form {
 width: 450px;
 margin: 0 auto;
 padding-bottom: 0;
 border-bottom: 0;
 }
 
-div.courses#search-container {
+div.courses#title-container {
     color: #000000;
     width: 5%;
 }
@@ -123,8 +124,13 @@ ion-icon.new-post {
 }
 
 ion-icon.menu {
-    font-size: 90px;
+    font-size: 50px;
     margin-left: 25px;
+    color: #000000;
+}
+
+ion-icon.menu-collapse {
+    font-size: 30px;
     color: #000000;
 }
 
@@ -158,15 +164,26 @@ ion-icon.post-filter {
   margin: 0;
 }
 
+@media screen and (max-width: 1336px) {
+    #posts-container .card {
+        min-width: 90%;
+        border-radius: 10px;
+        border: 1px solid #ffffff;
+        padding: 0;
+        margin: 0;
+      }
+
+}
+
 #posts-container img {
-  max-height: 150px;
+  height: 120px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
 .card .card-date {
   font-size: 12px;
-  color: #CCC;
+  color: #353535;
 }
 
 .card .card-title {
@@ -175,9 +192,9 @@ ion-icon.post-filter {
   font-weight: bold;
 }
 
-.card-participants {
+.card-category {
   font-size: 14px;
-  color: #757575;
+  color: #353535;
 }
 
 /* Create Page */
@@ -233,6 +250,16 @@ ion-icon.post-filter {
   margin: 20px 0;
 }
 
+/*dropdown*/
+
+#dropdown-menu li{
+    font-size: 30px;
+}
+
+#dropdown-menu ion-icon{
+    margin-bottom: -2px;
+    color: #bd0d0d;
+}
 /* Edit page */
 
 .img-preview {
@@ -245,10 +272,11 @@ footer {
   text-align: center;
   background-color: #a30c0c;
   color: #FFF;
-  padding: 30px;
+  padding: 15px;
   position: absolute;
   bottom: 0;
   width: 100%;
+  height: 60px;
 }
 
 footer p {

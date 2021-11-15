@@ -1,4 +1,5 @@
-@extends('layouts.main')
+<div>
+    @extends('layouts.main')
 
 @section('title', 'MyAcad')
 
@@ -35,3 +36,4 @@
     <ion-icon class="new-post" name="add-outline"></ion-icon>
     </a>
 @endsection
+</div>

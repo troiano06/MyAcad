@@ -2,19 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Livewire\Posts;
 
 /* MyAcad */
+Route::get('/teste', [Posts::class, 'render'])->middleware(['auth','verified']);
 Route::get('/', [PostController::class, 'index'])->middleware(['auth','verified']);
 Route::get('/categoria/{category?}', [PostController::class, 'category'])->middleware(['auth','verified']);
 Route::get('/posts/criar', [PostController::class, 'create'])->middleware(['auth','verified']);
@@ -22,11 +13,13 @@ Route::post('/posts/store', [PostController::class, 'store'])->middleware(['auth
 Route::get('/posts/{id}', [PostController::class, 'show'])->middleware(['auth','verified']);
 Route::get('/posts/edit/{id}', [PostController::class, 'edit'])->middleware(['auth','verified']);
 Route::put('/posts/update/{id}', [PostController::class, 'update'])->middleware(['auth','verified']);
+Route::put('/posts/enable/{id}', [PostController::class, 'enable'])->middleware(['auth','verified']);
 Route::put('/posts/disable/{id}', [PostController::class, 'disable'])->middleware(['auth','verified']);
 Route::get('/perfil/my-posts', [PostController::class, 'myPosts'])->middleware(['auth','verified']);
 Route::get('/perfil/edit', [PostController::class, 'profileEdit'])->middleware(['auth','verified']);
 Route::put('/perfil/update', [PostController::class, 'profileUpdate'])->middleware(['auth','verified']);
 Route::get('/perfil/{id}', [PostController::class, 'profile'])->middleware(['auth','verified']);
+Route::get('/notificacoes', [PostController::class, 'notifications'])->middleware(['auth','verified']);
 Route::get('/regras', [PostController::class, 'rules'])->middleware(['auth','verified']);
 
 

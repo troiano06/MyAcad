@@ -7,10 +7,20 @@
 
     <div class="col-md-12 ">
         <div class="row">
-            <h1>Perfil</h1>
             <div id="info-container" class="col-md-4">
                 <h1>{{ $user->name }}</h1>
-                <p class="post-owner">Email: {{ $user->email }} </p>
+                <p>Email: {{ $user->email }} </p>
+                <p>RA: {{ $user->RA }}</p>
+                <p>Semestre:
+                    @if ($user->semester != null)
+                        {{ $user->semester }}°
+                    @endif
+                </p>
+                <p>Curso:
+                    @if ($user->course_id != null)
+                        {{ $user->course->name }}
+                    @endif
+                </p>
             </div>
             <div id="info-container" class="col-md-3">
                 @if ($user->id == auth()->user()->id)
@@ -21,9 +31,5 @@
             </div>
         </div>
     </div>
-
-
-
-
 
 @endsection

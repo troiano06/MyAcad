@@ -39,7 +39,13 @@
                     <label for="title">Curso</label>
                     <select name="course_id" id="course_id" class="form-control">
                         @foreach ($courses as $course)
-                            <option value="{{ $course->id }}" {{ auth()->user()->course->id == $course->id ? "selected='selected'" : "" }} >{{ $course->name }}</option>
+                            <option value="{{ $course->id }}"
+                                @if (auth()->user()->course_id != null)
+                                {{ auth()->user()->course_id == $course->id ? "selected='selected'" : "" }}
+                                @endif
+                            >
+                            {{ $course->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
