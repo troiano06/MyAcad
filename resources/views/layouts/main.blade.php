@@ -51,6 +51,7 @@
                       </li>
                     </ul>
                 </div>
+                <img style="height: 60px;" src="/img/Fatec-sorocaba.png" alt="FatecLogo" id="FatecLogo">
                 <a class="navbar-brand" href="/"><img src="/img/myacad_logo.png" alt="MyAcad" id="logo"></a>
 
             </div>
