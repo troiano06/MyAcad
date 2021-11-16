@@ -1,3 +1,4 @@
+<div>
 @extends('layouts.main')
 
 @section('title', $post->title)
@@ -42,9 +43,8 @@
                 <p class="post-content">{{ $post->content }}</p>
             </div>
             <hr>
-            @livewire('show-comments')
+            @livewire('show-comments', ['post' => $post])
         </div>
     </div>
-
-
 @endsection
+</div>

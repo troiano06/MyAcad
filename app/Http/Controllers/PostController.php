@@ -18,13 +18,11 @@ class PostController extends Controller
 
             $posts = Post::where([
                 ['title', 'like', '%'.$search.'%']
-            ])->get();
+            ])->orderBy('id', 'desc')->get();
 
         } else {
-            $posts = Post::where('status', 'Aprovado')->get();
+            $posts = Post::where('status', 'Aprovado')->orderBy('id', 'desc')->get();
         }
-
-
 
         return view('posts', ['posts' => $posts, 'search' => $search]);
     }
@@ -34,7 +32,7 @@ class PostController extends Controller
         $posts = Post::where([
             ['category', ucfirst($category)],
             ['status', 'Aprovado']
-        ])->get();
+        ])->orderBy('id', 'desc')->get();
 
         return view('posts', ['posts' => $posts, 'search' => $search]);
     }
@@ -80,6 +78,11 @@ class PostController extends Controller
         $post->course_id = $request->course_id;
 
         $post->save();
+
+        if (auth()->user()->profile_type == 'Moderador'){
+
+            return redirect('/')->with('msg', 'Sua publicação já está ativa!');
+        }
 
         return redirect('/')->with('msg', 'Publicação foi enviada para análise!');
     }
@@ -138,21 +141,23 @@ class PostController extends Controller
 
         Post::where('id', $id)->update(array('status' => 'Aprovado'));
 
-        return redirect('/notificacoes')->with('msg', "Publicação". $id . " aprovada com sucesso!");
+        return redirect('/notificacoes')->with('msg', "Publicação #ID". $id . " aprovada com sucesso!");
     }
 
     public function disable($id) {
 
+        if (auth()->user()->profile_type == 'Moderador'){
+
+            Post::where('id', $id)->update(array('status' => 'Não aprovado'));
+
+            return redirect('/notificacoes')->with('msg', 'Publicação #ID' . $id . ' desativada com sucesso!');
+        }
 
         Post::where('id', $id)->update(array('status' => 'Desativado'));
 
         $post = Post::findOrFail($id);
 
-        if (auth()->user()->profile_type == 'Moderador' && $post->user_id != auth()->user()->id){
-            return redirect('/notificacoes')->with('msg', 'Publicação #ID' . $id . ' desativada com sucesso!');
-        }
-
-        return redirect('/perfil/my-posts')->with('msg', 'Publicação desativada com sucesso!');
+        return redirect('/perfil/my-posts')->with('msg', 'Publicação #ID' . $id . ' desativada com sucesso!');
     }
 
     public function like($postId) {

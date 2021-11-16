@@ -8,29 +8,34 @@ use Livewire\Component;
 class ShowComments extends Component
 {
     public $content = '';
-    public $post_url = '';
+    public $post;
 
     protected $rules = [
         'content' => 'required|min:3|max:255'
     ];
 
+    public function mount($post) {
+        $this->post = $post;
+    }
+
     public function render()
     {
-        $comments = Comment::all();
+        $comments = Comment::where('post_id', $this->post->id)->get();
 
         return view('livewire.show-comments', [
             'comments' => $comments
         ]);
     }
 
-    public function create($post_id = null) {
+    public function create() {
 
         $this->validate();
 
         auth()->user()->comment()->create([
             'content' => $this->content,
             'date' => date("Y-m-d H:i:s"),
-            'status' => $post_id,
+            'status' => "Ativo",
+            'post_id' => $this->post->id,
         ]);
 
         $this->content = '';

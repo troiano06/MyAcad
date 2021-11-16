@@ -5,12 +5,14 @@ use App\Http\Controllers\PostController;
 use App\Http\Livewire\Posts;
 
 /* MyAcad */
-Route::get('/teste', [Posts::class, 'render'])->middleware(['auth','verified']);
-Route::get('/', [PostController::class, 'index'])->middleware(['auth','verified']);
-Route::get('/categoria/{category?}', [PostController::class, 'category'])->middleware(['auth','verified']);
+Route::get('/', [Posts::class, 'render'])->middleware(['auth','verified']);
+//Route::get('/', [PostController::class, 'index'])->middleware(['auth','verified']);
+Route::get('/categoria/{category?}', [Posts::class, 'category'])->middleware(['auth','verified']);
+//Route::get('/categoria/{category?}', [PostController::class, 'category'])->middleware(['auth','verified']);
 Route::get('/posts/criar', [PostController::class, 'create'])->middleware(['auth','verified']);
 Route::post('/posts/store', [PostController::class, 'store'])->middleware(['auth','verified']);
-Route::get('/posts/{id}', [PostController::class, 'show'])->middleware(['auth','verified']);
+Route::get('/posts/{id}', [Posts::class, 'show'])->middleware(['auth','verified']);
+//Route::get('/posts/{id}', [PostController::class, 'show'])->middleware(['auth','verified']);
 Route::get('/posts/edit/{id}', [PostController::class, 'edit'])->middleware(['auth','verified']);
 Route::put('/posts/update/{id}', [PostController::class, 'update'])->middleware(['auth','verified']);
 Route::put('/posts/enable/{id}', [PostController::class, 'enable'])->middleware(['auth','verified']);

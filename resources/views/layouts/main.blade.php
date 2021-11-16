@@ -34,7 +34,7 @@
                     <ul class="dropdown-menu" id="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                       <li><a class="dropdown-item" href="/perfil/{{ auth()->user()->id }}"><ion-icon name="person-sharp"></ion-icon> Perfil</a></li>
                       @if (auth()->user()->profile_type == 'Moderador')
-                        <li><a class="dropdown-item" href="/notificacoes"><ion-icon name="at-circle-sharp"></ion-icon> Notificações</a></li>
+                        <li><a class="dropdown-item" href="/notificacoes"><ion-icon name="at-circle-sharp"></ion-icon> Moderação</a></li>
                       @endif
                       <li><a class="dropdown-item" href="/regras"><ion-icon name="alert-circle-sharp"></ion-icon> Regras</a></li>
                       <li><a class="dropdown-item" href="/calouros"><img src="/img/calouros_logo.png" alt="MyAcad" id="logo"></a></li>
