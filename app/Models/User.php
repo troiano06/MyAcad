@@ -70,7 +70,19 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo('App\Models\Course');
     }
 
+    public function likes() {
+        return $this->hasMany('App\Models\Like');
+    }
+
     public function comment() {
         return $this->hasMany('App\Models\Comment');
+    }
+
+    public function scopeSearch($query, $term){
+        $term = "%$term%";
+        $query->where(function($query) use ($term){
+            $query->where('email', 'like', $term);
+        });
+
     }
 }

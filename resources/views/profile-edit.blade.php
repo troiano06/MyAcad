@@ -17,7 +17,7 @@
                 </div>
                 <br>
                 <div class="form-group">
-                    <label for="title">Email</label>
+                    <label for="title">E-mail</label>
                     <input type="text" class="form-control" id="email" name="email" disabled value="{{auth()->user()->email}}">
                 </div>
                 <br>
@@ -29,6 +29,7 @@
                 <div class="form-group">
                     <label for="title">Semestre</label>
                     <select name="semester" id="semester" class="form-control">
+                        <option value="Todos" {{ auth()->user()->semester == 'Todos' ? "selected='selected'" : "" }}>Todos</option>
                         @for ($x=1; $x<9; $x++)
                             <option value="{{ $x }}" {{ auth()->user()->semester == $x ? "selected='selected'" : "" }}>{{ $x }}</option>
                         @endfor
@@ -41,7 +42,7 @@
                         @foreach ($courses as $course)
                             <option value="{{ $course->id }}"
                                 @if (auth()->user()->course_id != null)
-                                {{ auth()->user()->course_id == $course->id ? "selected='selected'" : "" }}
+                                    {{ auth()->user()->course_id == $course->id ? "selected='selected'" : "" }}
                                 @endif
                             >
                             {{ $course->name }}

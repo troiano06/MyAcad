@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="/img/favicon.png"/>
+        <link rel="icon" href="{{ url('css/favicon.jpg') }}">
         <title>@yield('title')</title>
 
         <!--Fonte do Google-->
@@ -36,6 +36,9 @@
                       @if (auth()->user()->profile_type == 'Moderador')
                         <li><a class="dropdown-item" href="/notificacoes"><ion-icon name="at-circle-sharp"></ion-icon> Moderação</a></li>
                       @endif
+                      @if (auth()->user()->profile_type == 'Administrador')
+                        <li><a class="dropdown-item" href="/usuarios"><ion-icon name="at-circle-sharp"></ion-icon> Gerenciar</a></li>
+                      @endif
                       <li><a class="dropdown-item" href="/regras"><ion-icon name="alert-circle-sharp"></ion-icon> Regras</a></li>
                       <li><a class="dropdown-item" href="/calouros"><img src="/img/calouros_logo.png" alt="MyAcad" id="logo"></a></li>
                       <li>
@@ -51,7 +54,7 @@
                       </li>
                     </ul>
                 </div>
-                <img style="height: 60px;" src="/img/Fatec-sorocaba.png" alt="FatecLogo" id="FatecLogo">
+                <a class="navbar-brand" href="http://www.fatecsorocaba.edu.br/default.asp"><img style="height: 60px;"  src="/img/Fatec-sorocaba.png" alt="FatecLogo" id="FatecLogo"></a>
                 <a class="navbar-brand" href="/"><img src="/img/myacad_logo.png" alt="MyAcad" id="logo"></a>
 
             </div>

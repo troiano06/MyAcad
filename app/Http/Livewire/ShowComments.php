@@ -20,7 +20,10 @@ class ShowComments extends Component
 
     public function render()
     {
-        $comments = Comment::where('post_id', $this->post->id)->get();
+        $comments = Comment::where([
+            ['post_id', $this->post->id],
+            ['status', 'Ativo']
+        ])->latest()->get();
 
         return view('livewire.show-comments', [
             'comments' => $comments
@@ -39,5 +42,10 @@ class ShowComments extends Component
         ]);
 
         $this->content = '';
+    }
+
+    public function disable($id) {
+
+        Comment::where('id', $id)->update(array('status' => 'Desativado'));
     }
 }

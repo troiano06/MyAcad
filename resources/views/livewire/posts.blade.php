@@ -5,7 +5,8 @@
 
 @section('content')
     <div id="title-container" class="col-12">
-        <h1>Mural Acadêmico Digital</h1>
+        <img style="height: 110px;"  src="/img/karp.png" alt="FatecLogo" id="CarpaLogo">
+        <img style="height: 100px;"  src="/img/mural.png" alt="FatecLogo" id="Mural">
     </div>
     <div id="posts-container" class="col-md-6 offset-md-3">
         @if ($search)

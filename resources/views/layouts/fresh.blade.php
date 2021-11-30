@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="/img/favicon.png"/>
+        <link rel="icon" href="{{ url('css/favicon.jpg') }}">
         <title>@yield('title')</title>
 
         <!--Fonte do Google-->

@@ -10,17 +10,31 @@
             <div id="info-container" class="col-md-4">
                 <h1>{{ $user->name }}</h1>
                 <p>Email: {{ $user->email }} </p>
-                <p>RA: {{ $user->RA }}</p>
+                @if ($user->course_id != '2')
+                    <p>RA: {{ $user->RA }}</p>
+                @endif
                 <p>Semestre:
                     @if ($user->semester != null)
-                        {{ $user->semester }}°
+                        @if ($user->semester == 'Todos')
+                            {{ $user->semester }}
+                        @else
+                            {{ $user->semester }}°
+                        @endif
                     @endif
                 </p>
                 <p>Curso:
                     @if ($user->course_id != null)
                         {{ $user->course->name }}
+                    @else
+                        Indefinido
                     @endif
                 </p>
+                @if ($user->profile_type != null)
+                    <p>Tipo de Conta: {{ $user->profile_type }}</p>
+                @else
+                    <p>Tipo de Conta: Comum</p>
+                @endif
+
             </div>
             <div id="info-container" class="col-md-3">
                 @if ($user->id == auth()->user()->id)

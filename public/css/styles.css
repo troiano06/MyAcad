@@ -148,7 +148,7 @@ ion-icon.post-filter {
 
 /* Posts list */
 #posts-container {
-  padding: 50px;
+  padding: 60px;
 }
 
 #cards-container {
@@ -216,11 +216,19 @@ ion-icon.post-filter {
 /* Post Show page */
 #image-container,
 #info-container {
-  margin-top: 30px;
+  margin-top: 20px;
+}
+#image-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 #image-container img {
   border-radius: 10px;
+  height: 250px;
+  width: 380px;;
+  justify-content: center;
 }
 
 #info-container h1 {
@@ -239,6 +247,11 @@ ion-icon.post-filter {
   font-size: 20px;
   font-weight: bold;
 }
+
+#content-container p {
+  text-indent: 40px;
+}
+
 
 #info-container ion-icon {
   font-size: 20px;

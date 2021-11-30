@@ -16,12 +16,14 @@ class PostController extends Controller
 
         if ($search) {
 
-            $posts = Post::where([
-                ['title', 'like', '%'.$search.'%']
-            ])->orderBy('id', 'desc')->get();
+            $posts = Post::where(['title', 'like', '%'.$search.'%'])
+                    ->whereIn('category',['Geral','Comunicado', 'Evento', 'Vaga', 'Artigo'])
+                    ->orderBy('name', 'desc')->get();
 
         } else {
-            $posts = Post::where('status', 'Aprovado')->orderBy('id', 'desc')->get();
+            $posts = Post::where('status', 'Aprovado')
+                    ->whereIn('category',['Geral','Comunicado', 'Evento', 'Vaga', 'Artigo'])
+                    ->orderBy('name', 'desc')->get();
         }
 
         return view('posts', ['posts' => $posts, 'search' => $search]);
@@ -51,7 +53,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->category = $request->category;
         $post->content = $request->content;
-        if (auth()->user()->profile_type == 'Moderador'){
+        if (auth()->user()->profile_type == 'Moderador' || auth()->user()->profile_type == 'Administrador'){
             $post->status = "Aprovado";
         } else {
             $post->status = "Pendente";
@@ -79,7 +81,7 @@ class PostController extends Controller
 
         $post->save();
 
-        if (auth()->user()->profile_type == 'Moderador'){
+        if (auth()->user()->profile_type == 'Moderador' || auth()->user()->profile_type == 'Administrador'){
 
             return redirect('/')->with('msg', 'Sua publicação já está ativa!');
         }
@@ -160,20 +162,6 @@ class PostController extends Controller
         return redirect('/perfil/my-posts')->with('msg', 'Publicação #ID' . $id . ' desativada com sucesso!');
     }
 
-    public function like($postId) {
-
-        $post = Post::find($postId);
-
-        $post->likes()->create([
-            'user_id' => auth()->user()->id
-        ]);
-    }
-
-    public function unlike(Post $post) {
-
-        $post->likes()->delete();
-    }
-
     //Perfil
     public function profile($id = null) {
 
@@ -208,7 +196,6 @@ class PostController extends Controller
         }
 
         $posts = Post::where([
-            ['course_id', auth()->user()->course_id],
             ['status', 'Pendente']
         ])->get();
 

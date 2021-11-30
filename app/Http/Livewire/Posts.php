@@ -19,12 +19,27 @@ class Posts extends Component
 
         if ($search) {
 
-            $posts = Post::where([
-                ['title', 'like', '%'.$search.'%']
-            ])->orderBy('id', 'desc')->get();
+            $posts = Post::where('title', 'like', '%'.$search.'%')
+                    ->whereIn('category',['Geral','Comunicado', 'Evento', 'Vaga', 'Artigo'])
+                    ->where('created_at', '>', date('Y-m-d', strtotime('-90 days')))
+                    ->orderBy('id', 'desc')->get();
 
         } else {
-            $posts = Post::where('status', 'Aprovado')->orderBy('id', 'desc')->get();
+            $posts = Post::where('status', 'Aprovado')
+                    ->whereIn('category',['Geral','Comunicado', 'Evento', 'Vaga', 'Artigo'])
+                    ->where('created_at', '>', date('Y-m-d', strtotime('-90 days')))
+                    ->orderBy('id', 'desc')->get();
+        }
+
+        if(auth()->user()->profile_type == 'Administrador'){
+            return view('livewire.posts', ['posts' => $posts, 'search' => $search]);
+        }
+
+        if(auth()->user()->email_verified_at < date('Y-m-d', strtotime('-180 days'))){
+            $user = auth()->user();
+            $user->email_verified_at = null;
+            $user->save();
+            return view('livewire.posts', ['posts' => $posts, 'search' => $search]);
         }
 
         return view('livewire.posts', ['posts' => $posts, 'search' => $search]);
@@ -34,7 +49,8 @@ class Posts extends Component
 
         $posts = Post::where([
             ['category', ucfirst($category)],
-            ['status', 'Aprovado']
+            ['status', 'Aprovado'],
+            ['created_at', '>', date('Y-m-d', strtotime('-90 days'))]
         ])->orderBy('id', 'desc')->get();
 
         return view('livewire.posts', ['posts' => $posts, 'search' => $search]);

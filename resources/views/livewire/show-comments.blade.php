@@ -1,18 +1,30 @@
 <div>
-    <h1>Comentários Post: {{$post->title}}</h1>
-
+    <h1>Comentários:</h1>
+    <br>
+    @if (count($comments) == 0)
+        <p>Ainda não há comentários... Seja o primeiro a comentar!</p>
+    @endif
     @foreach ($comments as $comment)
-    <p><a href="/perfil/{{ $comment->user->id }}"><strong>{{ $comment->user->name }}</strong></a> {{ date('d/m/Y H:m', strtotime($comment->date)) }}</p>
+    <div style="display: table;" id="comentarios">
+        <a style="display: table-cell;" href="/perfil/{{ $comment->user->id }}"><strong>{{ $comment->user->email }}</strong></a>&nbsp;
+        {{ $comment->created_at->format('d/m/Y H:i') }}&nbsp;
+        @if ($comment->user == auth()->user())
+            <form style="display: table-cell;" method="post" wire:submit.prevent="disable({{$comment->id}})">
+                <button type="submit" class="btn btn-dark">Excluir</button>
+            </form>
+        @endif
+    </div>
     <p>{{ $comment->content }}</p>
     <br>
     @endforeach
 <br>
     <form method="post" wire:submit.prevent="create()">
         <h4>Insira um comentário:</h4>
-        <input type="text" name="content" id="content" wire:model="content">
+        <textarea type="text" class="form-control" name="content" id="content" wire:model="content" rows="3"></textarea>
         @error('content')
             {{ $message }}
         @enderror
-        <button type="submit">Comentar</button>
+        <br>
+        <button type="submit" class="btn btn-dark">Comentar</button>
     </form>
 </div>

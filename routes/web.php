@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Livewire\Posts;
+use App\Http\Livewire\ShowUsers;
 
 /* MyAcad */
 Route::get('/', [Posts::class, 'render'])->middleware(['auth','verified']);
@@ -23,10 +24,13 @@ Route::put('/perfil/update', [PostController::class, 'profileUpdate'])->middlewa
 Route::get('/perfil/{id}', [PostController::class, 'profile'])->middleware(['auth','verified']);
 Route::get('/notificacoes', [PostController::class, 'notifications'])->middleware(['auth','verified']);
 Route::get('/regras', [PostController::class, 'rules'])->middleware(['auth','verified']);
+Route::get('/usuarios', [ShowUsers::class, 'render'])->middleware(['admin']);
+Route::put('/usuarios/upgrade/{id}', [ShowUsers::class, 'upgrade'])->middleware(['admin']);
+Route::put('/usuarios/downgrade/{id}', [ShowUsers::class, 'downgrade'])->middleware(['admin']);
 
 
 /* Calouros */
-Route::get('/calouros', [PostController::class, 'welcome'])->middleware('auth');
+//Route::get('/calouros', [PostController::class, 'welcome'])->middleware('auth');
 Route::get('/calouros/sobre', [PostController::class, 'about'])->middleware('auth');
 Route::get('/calouros/republicas', [PostController::class, 'republics'])->middleware('auth');
 Route::get('/calouros/depoimentos', [PostController::class, 'veterans'])->middleware('auth');
